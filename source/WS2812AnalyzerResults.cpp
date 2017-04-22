@@ -18,12 +18,24 @@ WS2812AnalyzerResults::~WS2812AnalyzerResults() {
 void WS2812AnalyzerResults::GenerateBubbleText(U64 frame_index,
 					       Channel& channel,
 					       DisplayBase display_base) {
-  ClearResultStrings();
-  Frame frame = GetFrame( frame_index );
+    ClearResultStrings();
+    Frame frame = GetFrame(frame_index);
 
-  char number_str[128];
-  AnalyzerHelpers::GetNumberString( frame.mData1, display_base, 8, number_str, 128 );
-  AddResultString( number_str );
+    if (frame.mData1 == RESET_VALUE) {
+	AddResultString("RESET");
+    } else if (mSettings->mType == WS2812AnalyzerSettings::FRAME) {
+	// do RGB
+	char rgb[16];
+	U64 grb = frame.mData1;
+	snprintf(rgb, sizeof rgb, "%06X (%02X%02X%02X)", grb,
+		 0xff & (grb >> 8), 0xff & (grb >> 16), 0xff & grb);
+	AddResultString(rgb);
+	snprintf(rgb, sizeof rgb, "%06X", grb);
+	AddResultString(rgb);
+    } else {
+	AddResultString(frame.mData1 - frame.mStartingSampleInclusive >
+		    frame.mEndingSampleInclusive - frame.mData1 ? "1" : "0");
+    }
 }
 
 void WS2812AnalyzerResults::GenerateExportFile(const char* file,

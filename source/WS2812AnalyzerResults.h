@@ -25,6 +25,7 @@ class WS2812AnalyzerResults : public AnalyzerResults {
   virtual void GenerateTransactionTabularText(U64 transaction_id,
 					      DisplayBase display_base );
 
+  static const U64 RESET_VALUE = ~0;
  protected: //functions
 
  protected:  //vars

@@ -16,11 +16,14 @@ public:
 
 	
   Channel mInputChannel;
-  U32 mBitRate;
+  enum Type {
+    BIT,
+    FRAME
+  } mType;
 
 protected:
-  std::auto_ptr< AnalyzerSettingInterfaceChannel >	mInputChannelInterface;
-  std::auto_ptr< AnalyzerSettingInterfaceInteger >	mBitRateInterface;
+  std::auto_ptr<AnalyzerSettingInterfaceChannel> mInputChannelInterface;
+  std::auto_ptr<AnalyzerSettingInterfaceNumberList> mTypeInterface;
 };
 
 #endif //WS2812_ANALYZER_SETTINGS

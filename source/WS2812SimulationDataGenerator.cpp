@@ -37,7 +37,7 @@ U32 WS2812SimulationDataGenerator::GenerateSimulationData( U64 largest_sample_re
 }
 
 void WS2812SimulationDataGenerator::CreateSerialByte()
-{
+{/*
 	U32 samples_per_bit = mSimulationSampleRateHz / mSettings->mBitRate;
 
 	U8 byte = mSerialText[ mStringIndex ];
@@ -68,4 +68,5 @@ void WS2812SimulationDataGenerator::CreateSerialByte()
 
 	//lets pad the end a bit for the stop bit:
 	mSerialSimulationData.Advance( samples_per_bit );
+ */
 }

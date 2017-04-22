@@ -20,10 +20,11 @@ class ANALYZER_EXPORT WS2812Analyzer : public Analyzer {
   virtual const char* GetAnalyzerName() const;
   virtual bool NeedsRerun();
 
- protected: //vars
+ protected:
+  static const U64 RESET_US = 50;  // reset pulse width in microseconds
+
   std::auto_ptr< WS2812AnalyzerSettings > mSettings;
   std::auto_ptr< WS2812AnalyzerResults > mResults;
-  AnalyzerChannelData* mSerial;
 
   WS2812SimulationDataGenerator mSimulationDataGenerator;
   bool mSimulationInitilized;
